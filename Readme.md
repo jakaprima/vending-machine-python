@@ -33,6 +33,11 @@ To maintain code quality and adhere to PEP 8 style guide, use `flake8` for linti
   ```
   flake8 .
   ```
+  
+5. **Swagger docs urls**
+```bash
+http://127.0.0.1:8000/docs
+```
 
 ## Project Structure
 
