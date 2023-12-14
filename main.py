@@ -5,7 +5,7 @@ from fastapi.openapi.utils import get_openapi
 from sqlalchemy.orm import Session
 
 from pydantic_models import Product as ProductPydantic, ProductBase, ProcessPurchase
-from models import Product, Base
+from models import Product
 from typing import List
 import redis
 import uuid
@@ -35,9 +35,7 @@ def find_combination(total_amount: int):
     combinations = []
     # Check all combinations of denominations
     for num_2000 in range(total_amount // 2000 + 1):
-        print("num 2000", num_2000)
         for num_5000 in range(total_amount // 5000 + 1):
-            print("num 5000", num_5000)
             if (num_2000 * 2000 + num_5000 * 5000) == total_amount:
                 combinations.append((num_2000, num_5000))
     return combinations
@@ -159,17 +157,13 @@ async def machine_process_money(payload: ProcessPurchase, db: Session = Depends(
 
 
 @app.get("/purchase/{process_id}/{selected_product_index}")
-async def purchase(process_id: str, selected_product_index: int, db: Session = Depends(get_db)):
+async def purchase(process_id: str, selected_product_index: int):
     if r.get("machine_process"):
         machine_process = json.loads(r.get('machine_process'))
-        print("purchase", process_id)
-        print("selected_product", selected_product_index)
         selected_product = machine_process["products"][selected_product_index]
 
         amount = machine_process["amount"]
         processing_amount = amount
-        print("A", selected_product)
-        print("AMOUNT", amount)
         quantity = 0
         while True:
             if processing_amount <= 0:

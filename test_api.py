@@ -3,8 +3,8 @@ import json
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from main import app, Base, get_db
-from models import Product
+from main import app, get_db
+from models import Product, Base
 from unittest.mock import patch
 
 SQLALCHEMY_TEST_DATABASE_URL = "postgresql://postgres:postgres@localhost/db_vending_machine_test"

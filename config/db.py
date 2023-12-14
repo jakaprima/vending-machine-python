@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Product, Base
+from models import Base
 
 DATABASE_URL = "postgresql://postgres:postgres@localhost/db_vending_machine"
 engine = create_engine(DATABASE_URL)
