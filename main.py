@@ -127,7 +127,8 @@ async def machine_process_money(payload: ProcessPurchase, db: Session = Depends(
         productPurchaseAble = []
         if not combinations:
             raise HTTPException(status_code=400,
-                                detail="only accept denominations Rp. 5000 and Rp. 2000.")
+                                detail="invalid denomination, only accept "
+                                       "denominations Rp. 5000 and Rp. 2000.")
         else:
             products = db.query(Product).all()
             for product_instance in products:
